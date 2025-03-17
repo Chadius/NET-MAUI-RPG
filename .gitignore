@@ -1,3 +1,4 @@
-/MAUI RPG/bin/
-/MAUI RPG/Platforms/
-/MAUI RPG/obj/
+bin/
+Platforms/
+obj/
+.idea/

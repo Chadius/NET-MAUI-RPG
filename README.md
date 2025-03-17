@@ -1,3 +1,6 @@
+# GUI frontend Kata tasks
+https://eugenkiss.github.io/7guis/tasks/
+
 # .NET MAUI in VS Code
 
 I'm following a class on making GUI applications in .NET. 

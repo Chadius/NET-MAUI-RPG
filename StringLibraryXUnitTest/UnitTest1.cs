@@ -1,9 +1,17 @@
 ﻿using MAUI_RPG;
+using Moq;
 
 namespace StringLibraryXUnitTest
 {
     public class UnitTest1
     {
+        private Mock<IRandomIntegerGenerator>? _randomIntegerGeneratorMock;
+
+        public UnitTest1()
+        {
+            _randomIntegerGeneratorMock = new Mock<IRandomIntegerGenerator>();
+        }
+
         [Theory]
         [InlineData("Alphabet")]
         [InlineData("Zebra")]
@@ -48,6 +56,20 @@ namespace StringLibraryXUnitTest
                        string.Format("Expected for '{0}': false; Actual: {1}",
                                      word == null ? "<null>" : word, result));
             }
+        }
+
+        [Theory]
+        [InlineData(0, "a")]
+        [InlineData(12, "m")]
+        [InlineData(13, "n")]
+        [InlineData(25, "z")]
+        public void GenerateRandomLetterIsPredictableBasedOnRandom(Int32 mockResult, string expectedLetter)
+        {
+            Assert.NotNull(_randomIntegerGeneratorMock);
+            _randomIntegerGeneratorMock.Setup(p => p.Next(It.IsAny<Int32>())).Returns(mockResult);
+
+            string randomLetter = StringLibrary.GenerateRandomLetter(_randomIntegerGeneratorMock.Object);
+            Assert.Equal(expectedLetter, randomLetter);
         }
     }
 }
